@@ -1,0 +1,50 @@
+﻿<!-- container -->
+
+
+<div class="container">
+    <div id="responsive-nav">
+
+        @*<ul class="main-nav nav navbar-nav">
+
+            <li class="@(Request.Url.ToString().Substring(Request.Url.ToString().LastIndexOf('/')+1) == "" ? "active" : "")"><a href="~/" class="a">Trang chủ</a></li>
+            @foreach (var d in ViewBag.danhmuc)
+            {
+
+                <li onclick="myFunction()" class="@(Request.Url.ToString().Substring(Request.Url.ToString().LastIndexOf('/')+1) == d.CategoryLink ? "active" : "") navitem" data-id="@d.CategoryLink" id="@d.CategoryLink"><a href="~/Products/@d.CategoryLink" class="a">@d.CategoryName</a></li>
+
+            }
+
+
+        </ul>*@
+        <div class="row" style="display : flex; align-items : center; justify-content: flex-start">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Danh Mục</span>
+                    </div>
+                    <ul class="droplist-type">
+                        @{
+                            ClothesShop.Models.ClothesShopEntities db = new ClothesShop.Models.ClothesShopEntities();
+                            var Type = db.Categories.ToList();
+                            foreach (var item in Type)
+                            {
+                                <li><a href="@Url.Action(item.CategoryLink,"Products")">@item.CategoryName</a></li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <a  style="margin: 0 60px; padding: 12px; font-size: 18px" href="~/Home/About">Giới thiệu</a>
+            <a style="padding: 12px; font-size : 18px" href="~/Home/Contact">Liên hệ</a>
+
+        </div>
+        </div>
+
+</div> 
+<script>
+    $('.hero__categories__all').on('click', function () {
+        $('.hero__categories ul').slideToggle(400);
+    });
+</script> 
